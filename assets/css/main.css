@@ -1,0 +1,14 @@
+:root{
+--blue-color:#2e3192;
+--red-color:#e4332f;
+--orange-color:#f56039;
+--semiDarkRed-color:#ef2853;
+--silver-color:#eef6ff;
+--milkyWhite-color:#fff2f2;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
