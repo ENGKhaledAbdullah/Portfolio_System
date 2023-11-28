@@ -6,7 +6,7 @@
         <?php
         
         ?>
-        <form action="info.php" method="post">
+        <form action="info.php" method="post" enctype="multipart/form-data">
             <div class="input-box">
                 <input type="text" name="fullname" placeholder="Full Name" >
                 <input type="email" name="email" placeholder="Email Address" >
@@ -70,31 +70,53 @@
             <div class="input-box" id="tagContainer">
                 
             </div >
-            
+            <div class="input-box">
+                <label for="works" class="info-label" style="font-size: 22px;color: gray;display: inline-block;">Your Works:</label>
+                <br>
+            </div>
+            <div class="input-box">
+            <input type="text" name="project-name" placeholder="Project Name" >
+            <input type="text" name="project-description" placeholder="Project description" >
+            <input type="text" name="project-url" placeholder="Project URL" >
+            </div>
+            <div class="input-box">
+                <label for="project-img" class="info-label" style="font-size: 22px;color: gray;display: inline-block;">Project Image</label>
+            </div>
+            <div class="input-box">
+                <input type="file"  name="project-img">
+            </div>
             <input type="submit" name="submit" value="submit" class="btn">
             
             
         </form>
 </section>
 <script>
-    // Move the JavaScript code here
     document.addEventListener('DOMContentLoaded', function() {
-        // Select the necessary elements
         const selectOptions = document.getElementById('skill');
         const addTagButton = document.getElementById('addTagButton');
         const tagContainer = document.getElementById('tagContainer');
+        const selectedSkills = []; // Array to store selected skills
 
-        // Add an event listener to the add tag button
         addTagButton.addEventListener('click', function() {
         const selectedOption = selectOptions.value;
 
-        if (selectedOption) {
+        if (selectedOption && !selectedSkills.includes(selectedOption)) {
             const tag = document.createElement('span');
             tag.textContent = selectedOption;
             tag.classList.add('badge', 'bg-primary', 'me-1');
 
-            // Append the tag to the tag container
+            const closeButton = document.createElement('span');
+            closeButton.textContent = 'x';
+            closeButton.classList.add('close-button');
+            closeButton.addEventListener('click', function() {
+            tagContainer.removeChild(tag);
+            selectedSkills.splice(selectedSkills.indexOf(selectedOption), 1);
+            });
+
+            tag.appendChild(closeButton);
             tagContainer.appendChild(tag);
+
+            selectedSkills.push(selectedOption);
         }
         });
     });

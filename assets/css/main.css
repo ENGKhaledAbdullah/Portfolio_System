@@ -619,7 +619,19 @@ label.info-label{
     color: gray;
     display: inline-block;
 }
-
+.badge{
+    display: inline;
+    font-size: 18px;
+    float: left;
+}
+.close-button{
+    display: inline-block;
+    width: 20px;
+    cursor: pointer;
+    margin-left: 5px;
+    border: 1px solid #754ef9;
+    border-radius: 5px;
+}
 .footer {
     display: flex;
     justify-content: space-between;
