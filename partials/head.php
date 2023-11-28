@@ -1,5 +1,5 @@
- <!-- home section design -->
- <section class="home" id="home">
+<!-- home section design -->
+<section class="home" id="home">
         <div class="home-content">
             <h3>Hello, I am</h3>
             <h1>Khaled Abdullah</h1>
