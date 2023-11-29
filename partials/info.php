@@ -1,12 +1,82 @@
-<?php require('header.php') ?>
+<?php require('header.php');
+
+?>
 
 <!-- info section design -->
 <section class="contact" id="info">
         <h2 class="heading">enter your  <span>Info</span></h2>
         <?php
-        
-        ?>
-        <form action="info.php" method="post" enctype="multipart/form-data">
+            if (isset($_POST['submit'])) {
+                $fullname = $_POST['fullname'];
+                $email = $_POST['email'];
+                $jobName = $_POST['jobName'];
+                $education = $_POST['education'];
+                $about = $_POST['about'];
+                $hireState = $_POST['hireState'];
+                $selectedSkills = $_POST['selectedSkills'];
+                $projectName = $_POST['project-name'];
+                $projectDescription = $_POST['project-description'];
+                $projectURL = $_POST['project-url'];
+
+                $error = array();
+                if (empty($fullname) || empty($email) || empty($jobName) || empty($education) || empty($about) || empty($hireState) || empty($selectedSkills)) {
+                    array_push($error, 'All fields are required');
+                }
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    array_push($error, 'Email is not valid');
+                }
+                if (count($error) > 0) {
+                    foreach ($error as $msg) {
+                        echo '<div class="alert alert-danger">' . $msg . '</div>';
+                    }
+                } else {
+                    require_once('database.php');
+
+                    // Insert user_info data into users_info table
+                    $insertUserInfoQuery = "INSERT INTO user_info (user_info_name, user_info_email, job_name, about_user, education, employment) VALUES (?, ?, ?, ?, ?, ?)";
+                    $stmt = mysqli_stmt_init($conn);
+                    $prepareStmt = mysqli_stmt_prepare($stmt, $insertUserInfoQuery);
+                    if ($prepareStmt) {
+                        mysqli_stmt_bind_param($stmt, "ssssss", $fullname, $email, $jobName, $about, $education, $hireState);
+                        mysqli_stmt_execute($stmt);
+
+                        $userId = mysqli_insert_id($conn); // Retrieve the auto-generated user_id
+                        // print_r($selectedSkills); exit;
+                        // Insert selected skills into user_skills table
+                        foreach ($selectedSkills as $selectedSkill) {
+                            // Extract the skill ID from the value
+                            $skillId = explode(' ', $selectedSkill)[0];
+
+                            // Insert the skill_id and user_id into the user_skills table
+                            $insertUserSkillsQuery = "INSERT INTO user_skill (skill_id, user_id) VALUES (?, ?)";
+                            $stmt = mysqli_stmt_init($conn);
+                            $prepareStmt = mysqli_stmt_prepare($stmt, $insertUserSkillsQuery);
+                            if ($prepareStmt) {
+                                mysqli_stmt_bind_param($stmt, "ii", $skillId, $userId);
+                                mysqli_stmt_execute($stmt);
+                            } else {
+                                die('Something went wrong inserting user skills');
+                            }
+                        }
+
+                        // Insert project data into works table
+                        $insertWorksQuery = "INSERT INTO works (name, description, url,u_id) VALUES (?, ?, ?,?)";
+                        $stmt = mysqli_stmt_init($conn);
+                        $prepareStmt = mysqli_stmt_prepare($stmt, $insertWorksQuery);
+                        if ($prepareStmt) {
+                            mysqli_stmt_bind_param($stmt, "ssss", $projectName, $projectDescription, $projectURL,$userId);
+                            mysqli_stmt_execute($stmt);
+                            echo '<div class="alert alert-success">You have successfully added info.</div>';
+                        } else {
+                            die('Something went wrong inserting new project');
+                        }
+                    } else {
+                        die('Something went wrong inserting new user');
+                    }
+                }
+            }
+            ?>
+        <form action="info.php" method="post" id="info-form" enctype="multipart/form-data">
             <div class="input-box">
                 <input type="text" name="fullname" placeholder="Full Name" >
                 <input type="email" name="email" placeholder="Email Address" >
@@ -45,24 +115,20 @@
                 <br>
             </div>
             <div class="input-box">
-                <select name="skills" id="skill" style="font-size: 20px;color: gray;display: inline-block; cursor:pointer;" >
-                    <optgroup style="color:#754ef9; cursor:pointer;">
-                        <option value="html" name="html" >html</option>
-                        <option value="css" name="css">css</option>
-                        <option value="js" name="js">javascript</option>
-                        <option value="bootstrap" name="bootstrap">bootstrap</option>
-                        <option value="node" name="node">node.js</option>
-                        <option value="php" name="name">php</option>
-                        <option value="mysql" name="mysql">mysql</option>
-                        <option value="mongodb" name="mongodb">mongodb</option>
-                        <option value="jquery" name="jquery">jquery</option>
-                        <option value="ajax" name="ajax">ajax</option>
-                        <option value="git" name="git">git</option>
-                        <option value="github" name="github">github</option>
-                        <option value="figma" name="figma">figma</option>
+                <?php
+                    require_once('database.php');
+                    $query = "SELECT skill_id, skill_name FROM skills";
+                    $result = mysqli_query($conn, $query);
+                ?>
+                <select name="skills" id="skill"  style="font-size: 20px; color: gray; display: inline-block; cursor: pointer;">
+                    <optgroup style="color: #754ef9; cursor: pointer;">
+                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                            <option value="<?php echo $row['skill_id'] . ' ' . $row['skill_name']; ?>" name="skills[<?php echo $row['skill_id']; ?>]">
+                                <?php echo $row['skill_name']; ?>
+                            </option>
+                        <?php endwhile; ?>
                     </optgroup>
                 </select>
-                
             </div>
             <div class="input-box">
                 <button type="button" class="btn btn-primary" id="addTagButton">Add Skill</button>
@@ -86,39 +152,100 @@
                 <input type="file"  name="project-img">
             </div>
             <input type="submit" name="submit" value="submit" class="btn">
-            
-            
         </form>
 </section>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const selectOptions = document.getElementById('skill');
-        const addTagButton = document.getElementById('addTagButton');
-        const tagContainer = document.getElementById('tagContainer');
-        const selectedSkills = []; // Array to store selected skills
+    const selectOptions = document.getElementById('skill');
+    const addTagButton = document.getElementById('addTagButton');
+    const tagContainer = document.getElementById('tagContainer');
+    const selectedSkills = []; // Array to store selected skills
 
-        addTagButton.addEventListener('click', function() {
+    addTagButton.addEventListener('click', function() {
         const selectedOption = selectOptions.value;
 
         if (selectedOption && !selectedSkills.includes(selectedOption)) {
-            const tag = document.createElement('span');
-            tag.textContent = selectedOption;
-            tag.classList.add('badge', 'bg-primary', 'me-1');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = selectedOption;
+            checkbox.name = 'selectedSkills[]';
+            checkbox.id = 'checkbox-' + selectedOption;
+
+            const label = document.createElement('label');
+            label.textContent = selectedOption;
+            label.htmlFor = 'checkbox-' + selectedOption;
 
             const closeButton = document.createElement('span');
             closeButton.textContent = 'x';
             closeButton.classList.add('close-button');
             closeButton.addEventListener('click', function() {
-            tagContainer.removeChild(tag);
-            selectedSkills.splice(selectedSkills.indexOf(selectedOption), 1);
+                tagContainer.removeChild(checkbox.parentNode);
+                selectedSkills.splice(selectedSkills.indexOf(selectedOption), 1);
             });
 
+            const tag = document.createElement('div');
+            tag.classList.add('tag');
+            tag.appendChild(checkbox);
+            tag.appendChild(label);
             tag.appendChild(closeButton);
             tagContainer.appendChild(tag);
 
             selectedSkills.push(selectedOption);
         }
-        });
     });
+});
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     // const form=document.getElementById('info-form')
+    //     const selectOptions = document.getElementById('skill');
+    //     const addTagButton = document.getElementById('addTagButton');
+    //     const tagContainer = document.getElementById('tagContainer');
+    //     const selectedSkills = []; // Array to store selected skills
+
+    //     addTagButton.addEventListener('click', function() {
+    //     const selectedOption = selectOptions.value;
+
+    //     if (selectedOption && !selectedSkills.includes(selectedOption)) {
+    //         const tag = document.createElement('span');
+    //         tag.textContent = selectedOption;
+    //         tag.classList.add('badge', 'bg-primary', 'me-1');
+
+    //         const closeButton = document.createElement('span');
+    //         closeButton.textContent = 'x';
+    //         closeButton.classList.add('close-button');
+    //         closeButton.addEventListener('click', function() {
+    //         tagContainer.removeChild(tag);
+    //         selectedSkills.splice(selectedSkills.indexOf(selectedOption), 1);
+    //         });
+
+    //         tag.appendChild(closeButton);
+    //         tagContainer.appendChild(tag);
+
+    //         selectedSkills.push(selectedOption);
+    //     }
+    //     });
+        
+        // form.addEventListener('submit',function(e){
+        //     let skills=[];
+        //     // e.preventDefault();
+        //     const tag =document.querySelectorAll("#tagContainer > span")
+        //     // console.log(tag);
+        //     tag.forEach(e =>{
+        //         console.log(e)
+
+        //         const id=e.innerText;
+
+        //         skills.push(+id.split(" ")[0])
+                
+        //     })
+            
+        //     console.log(skills)
+        //     const http = new XMLHttpRequest();
+        //     http.onload=()=>{
+
+        //     }
+        //     http.open("post",'info.php');
+        //     http.send(skills)
+        // })
+    // });
 </script>
-<?php require('footer.php') ?>
+<?php require('footer.php'); ?>

@@ -619,10 +619,21 @@ label.info-label{
     color: gray;
     display: inline-block;
 }
-.badge{
-    display: inline;
-    font-size: 18px;
+.tag{
+    width: 100px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     float: left;
+    color: #754ef9;
+}
+.tag label{
+    width: -webkit-fill-available;
+    cursor: pointer;
+}
+.tag input[type="checkbox"]:checked{
+    color: #754ef9;
 }
 .close-button{
     display: inline-block;
