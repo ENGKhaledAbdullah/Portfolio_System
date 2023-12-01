@@ -48,6 +48,7 @@ body {
     padding: 2rem 7%;
     background: transparent;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     z-index: 100;
     transition: .5s;
@@ -57,7 +58,14 @@ body {
     background: var(--bg-color);
     box-shadow: 0 .1rem 1rem var(--shadow-color);
 }
-#search{
+
+#search-form{
+    display: flex;
+    
+    
+}
+
+#search-bar{
     position: relative;
     padding-left: 15px;
     color: #754ef9;
@@ -68,14 +76,14 @@ body {
     border: 1px solid #754ef9;
     border-radius: 10px;
 }
-#search::placeholder{
+#search-bar::placeholder{
     color: #754ef9;
 }
 #btn-search{
     height: 35px;
     width: 40px;
     position: relative;
-    right: 98px;
+    right: 23%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +96,7 @@ body {
     font-size: 2.5rem;
     color: var(--main-color);
     font-weight: 600;
-    margin-right: auto;
+    /* margin-right: auto; */
 }
 
 .navbar a {
@@ -153,7 +161,14 @@ section {
 }
 
 .home .home-content {
-    max-width: 44rem;
+    display: flex;
+    position: relative;
+    bottom: 50px;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 .home-content h3 {
@@ -166,6 +181,7 @@ section {
     font-size: 5.6rem;
     font-weight: 700;
     margin-bottom: .3rem;
+    color: #754ef9;
 }
 
 .home-content p {
@@ -842,13 +858,19 @@ label.info-label{
         justify-content: center;
         text-align: center;
     }
+    .home-content {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        text-align: center;
 
+    }
     .home-content h3 {
-        font-size: 2.6rem;
+        font-size: 3.2rem;
     }
 
     .home-content h1 {
-        font-size: 5rem;
+        font-size: 6rem;
     }
 
     .home-content .social-media a {

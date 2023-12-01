@@ -24,8 +24,10 @@ define("ROOT_PATH","/Portfolio_System/");
     <!-- header design -->
 <header class="header">
     <a href="#" class="logo">Pfolio</a>
-    <input class="form-control me-2" id="search" type="search" name="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" id="btn-search" type="submit"><i class="bx bx-search"></i></button>
+    <form method="post" id="search-form" action="/Portfolio_System/partials/portfolio.php">
+        <input class="form-control me-2" id="search-bar" type="search" name="username" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" id="btn-search" type="submit"><i class="bx bx-search"></i></button>
+    </form>
     <nav class="navbar">
         
         <a href="#home" class="active">Home</a>
