@@ -17,7 +17,7 @@
 
     <!-- swiper js -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="<?php echo ROOT_PATH;?>assets/js/script.js">
+    <script src="<?= ROOT_PATH?>assets/js/script.js">
         
     </script>
 </body>

@@ -22,7 +22,7 @@ define("ROOT_PATH","/Portfolio_System/");
 </head>
 <body>
     <!-- header design -->
-<header class="header">
+<header class="header" >
     <a href="<?php echo ROOT_PATH;?>" class="logo">Pfolio</a>
     <form method="post" id="search-form" action="/Portfolio_System/partials/portfolio.php">
         <input class="form-control me-2" id="search-bar" type="search" name="username" placeholder="Search" aria-label="Search">

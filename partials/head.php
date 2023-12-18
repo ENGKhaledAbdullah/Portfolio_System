@@ -14,7 +14,7 @@
             </div> -->
             <br>
             <br>
-            <a href="#" class="btn">Join Now</a>
+            <a href="<?= ROOT_PATH.'partials/register.php'?>" class="btn">Join Now</a>
 
 
         </div>

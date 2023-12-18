@@ -7,19 +7,19 @@
         <h2 class="heading">enter your  <span>Info</span></h2>
         <?php
             if (isset($_POST['submit'])) {
-                $fullname = $_POST['fullname'];
+                $fullname = $_POST['username'];
                 $email = $_POST['email'];
-                $jobName = $_POST['jobName'];
+                $jobName = $_POST['job_name'];
                 $education = $_POST['education'];
-                $about = $_POST['about'];
-                $hireState = $_POST['hireState'];
+                $about = $_POST['about_user'];
+                $employment = $_POST['employment'];
                 $selectedSkills = $_POST['selectedSkills'];
-                $projectName = $_POST['project-name'];
-                $projectDescription = $_POST['project-description'];
-                $projectURL = $_POST['project-url'];
+                $projectName = $_POST['name'];
+                $projectDescription = $_POST['description'];
+                $projectURL = $_POST['url'];
 
                 $error = array();
-                if (empty($fullname) || empty($email) || empty($jobName) || empty($education) || empty($about) || empty($hireState) || empty($selectedSkills)) {
+                if (empty($fullname) || empty($email) || empty($jobName) || empty($education) || empty($about) || empty($employment) || empty($selectedSkills)) {
                     array_push($error, 'All fields are required');
                 }
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -37,7 +37,7 @@
                     $stmt = mysqli_stmt_init($conn);
                     $prepareStmt = mysqli_stmt_prepare($stmt, $insertUserInfoQuery);
                     if ($prepareStmt) {
-                        mysqli_stmt_bind_param($stmt, "ssssss", $fullname, $email, $jobName, $about, $education, $hireState);
+                        mysqli_stmt_bind_param($stmt, "ssssss", $fullname, $email, $jobName, $about, $education, $employment);
                         mysqli_stmt_execute($stmt);
 
                         $userId = mysqli_insert_id($conn); // Retrieve the auto-generated user_id
@@ -95,19 +95,19 @@
                 <input type="file"  name="secondaryPicture" class="info-label" >
             </div>
             <div class="input-box">
-                <label for="hireState" class="info-label" style="font-size: 22px;color: gray;display: inline-block;">Your status:</label>
+                <label for="employment" class="info-label" style="font-size: 22px;color: gray;display: inline-block;">Your status:</label>
                 <br>
                 </div>
             <div class="input-box" style="direction:rtl;">
-                <input type="radio" name="hireState" id="ready" value="ready for hire">
+                <input type="radio" name="employment" id="ready" value="ready for hire">
                 <label for="ready" class="info-label" style="font-size: 20px;color: gray;display: inline-block; cursor:pointer;">Ready for hire</label>
             </div>
                 <div class="input-box"  style="direction:rtl;">
-                <input type="radio" name="hireState" id="employed" value="employed">
+                <input type="radio" name="employment" id="employed" value="employed">
                 <label for="employed" class="info-label" style="font-size: 20px;color: gray;display: inline-block; cursor:pointer;">Employed</label>
             </div>
             <div class="input-box"  style="direction:rtl;">
-                <input type="radio" name="hireState" id="either" value=" ">
+                <input type="radio" name="employment" id="either" value=" ">
                 <label for="either" class="info-label" style="font-size: 20px;color: gray;display: inline-block; cursor:pointer;">Either</label>
             </div>
             <div class="input-box">
@@ -141,9 +141,9 @@
                 <br>
             </div>
             <div class="input-box">
-            <input type="text" name="project-name" placeholder="Project Name" >
-            <input type="text" name="project-description" placeholder="Project description" >
-            <input type="text" name="project-url" placeholder="Project URL" >
+            <input type="text" name="name" placeholder="Project Name" >
+            <input type="text" name="description" placeholder="Project description" >
+            <input type="text" name="url" placeholder="Project URL" >
             </div>
             <div class="input-box">
                 <label for="project-img" class="info-label" style="font-size: 22px;color: gray;display: inline-block;">Project Image</label>
