@@ -12,7 +12,9 @@
             $result=mysqli_query($conn,$sql);
             $user=mysqli_fetch_array($result,MYSQLI_ASSOC);
             if($user){
-                if(password_verify($password,$user["password"])){
+                $password_hash=hash('sha512',$password);
+                
+                if($password_hash === $user["password"]){
                     header("Location: index.php");
                     die();
                 }
@@ -25,11 +27,11 @@
             }
         }
         ?>
-        <form action="signIn.php" method="post">
-            <div class="input-box">
+        <form action="signIn.php" class="sign-in-from" method="post">
+            <div class="input-box" id="box-input">
                 <input type="email" name="email" placeholder="Email Address" >    
             </div>
-            <div class="input-box">
+            <div class="input-box" id="box-input">
                 <input type="password" name="password" placeholder="Password" >
             </div>
             <input type="submit" name="login" value="Login" class="btn">

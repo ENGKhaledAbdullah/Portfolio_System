@@ -1,5 +1,5 @@
 <!-- home section design -->
-<section class="home" id="home">
+<section class="home-home" id="home">
         <div class="home-content">
             <h1>Pfolio</h1>
             <br>
@@ -15,11 +15,13 @@
             <br>
             <br>
             <a href="#" class="btn">Join Now</a>
+
+
         </div>
 
         <div class="profession-container">
-            <!-- <div class="profession-box">
-                <div class="profession" style="--i:0;">
+                <div class="profession-box">
+                <!-- <div class="profession" style="--i:0;">
                     <i class='bx bx-code-alt'></i>
                     <h3>Web Developer</h3>
                 </div>
@@ -34,10 +36,10 @@
                 <div class="profession" style="--i:3;">
                     <i class='bx bx-search'></i>
                     <h3>UI/UX Tester</h3>
-                </div>
+                </div> -->
 
                 <div class="circle"></div>
-            </div> -->
+            </div> 
 
             <div class="overlay"></div>
         </div>

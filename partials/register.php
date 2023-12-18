@@ -8,11 +8,12 @@
             $password = $_POST['password'];
             $email = $_POST['email'];
             $password2 = $_POST['password-repeat'];
-            $password_hash=password_hash($password, PASSWORD_DEFAULT);
+            $password_hash=hash('sha512',$password);
 
             $error=array();
             if(empty($email) || empty($password) || empty($password2) || empty($email)){
                 array_push($error,'All field are required');
+                
             }
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 array_push($error,'Email is not valid');
@@ -44,6 +45,9 @@
                     mysqli_stmt_bind_param($stmt,"sss",$full_name, $email,$password_hash);
                     mysqli_stmt_execute($stmt);
                     echo '<div class="alert alert-success">You are successfully registered.</div>';
+                    sleep(3);
+                    header('Location: signIn.php');
+                    
                 }
                 else{
                     die('something went wrong inserting new user');

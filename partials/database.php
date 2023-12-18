@@ -1,7 +1,7 @@
 <?php
 
 $hostName="localhost";
-$port=6000;
+$port=3306;
 $dbUser= "root";
 $dbPassword= "";
 $dbName="portfolios";
