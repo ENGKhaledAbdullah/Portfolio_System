@@ -15,8 +15,8 @@
                 $password_hash=hash('sha512',$password);
                 
                 if($password_hash === $user["password"]){
-                    header("Location: index.php");
-                    die();
+                    header("Location: info.php");
+                    
                 }
                 else{
                     echo "<div class='alert alert-danger'>Password is not correct</div>";

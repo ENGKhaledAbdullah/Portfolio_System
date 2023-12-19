@@ -1,7 +1,7 @@
 <?php 
     $username='';
     if (isset($_POST['username'])) {
-        // $username = $_POST['username'];
+        $username = $_POST['username'];
         // $fullname = $_POST['fullname'];
         // $email = $_POST['email'];
         // $jobName = $_POST['jobName'];
@@ -13,17 +13,17 @@
         // $projectDescription = $_POST['project-description'];
         // $projectURL = $_POST['project-url'];
         require_once('database.php');
-        $sql="SELECT * FROM users WHERE user_name ='$username'";
+        $sql="SELECT * FROM users WHERE username ='$username'";
         $result = mysqli_query($conn,$sql);
         $user = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        // print_r($user); 
+        print_r($user); 
         if(!empty($user)){
-            $sql="SELECT * FROM user_info WHERE user_id ='".$user['user_id']."'";
+            $sql="SELECT * FROM user_info WHERE id ='".$user['id']."'";
             $result = mysqli_query($conn,$sql);
             $userInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
             // print_r($userInfo); 
             if(!empty($userInfo)){
-                $sql="SELECT * FROM user_skill WHERE user_id ='".$userInfo['info_id']."'";
+                $sql="SELECT * FROM user_skill WHERE user_id ='".$userInfo['id']."'";
                 $result = mysqli_query($conn,$sql);
                 $skills = array();
                 // while ($row = mysqli_fetch_array($result)) {
@@ -33,7 +33,7 @@
                 // print_r($skills);
             }
             if(!empty($userInfo)){
-                $sql="SELECT * FROM works WHERE u_id ='".$userInfo['info_id']."'";
+                $sql="SELECT * FROM works WHERE u_id ='".$userInfo['id']."'";
                 $result = mysqli_query($conn,$sql);
                 $works = array();
                 // while ($row = mysqli_fetch_array($result)) {
@@ -51,7 +51,7 @@
         <div class="home-content">
             <h3>Hello, I am</h3>
             <h1><?php echo $result['username']?></h1>
-            <p> <?php echo $about?></p>
+            <p> <?php echo $result['about_user']?></p>
 
             <div class="social-media">
                 <a href="#"><i class='bx bxl-facebook'></i></a>

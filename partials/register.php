@@ -38,11 +38,11 @@
             }
             else{
                 require_once('database.php');
-                $sql = "INSERT INTO users (user_name,email,password) VALUES ( ? , ? , ? )";
+                $sql = "INSERT INTO users (email,password,username) VALUES ( ? , ? , ? )";
                 $stmt = mysqli_stmt_init($conn);
                 $prepareStmt= mysqli_stmt_prepare($stmt,$sql);
                 if($prepareStmt){
-                    mysqli_stmt_bind_param($stmt,"sss",$full_name, $email,$password_hash);
+                    mysqli_stmt_bind_param($stmt,"sss",$email, $password_hash,$full_name);
                     mysqli_stmt_execute($stmt);
                     echo '<div class="alert alert-success">You are successfully registered.</div>';
                     sleep(3);

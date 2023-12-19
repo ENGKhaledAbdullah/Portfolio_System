@@ -1,5 +1,6 @@
 <?php
 // define("ROOT_PATH","/Portfolio_System/");
+
 ?>
 <!-- footer design -->
 <footer class="footer">
@@ -8,7 +9,7 @@
         </div>
 
         <div class="footer-iconTop">
-            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
         </div>
     </footer>
     <script src="<?php echo ROOT_PATH;?>assets/bootstrap-5.3.2-dist/bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>

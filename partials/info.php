@@ -117,14 +117,14 @@
             <div class="input-box">
                 <?php
                     require_once('database.php');
-                    $query = "SELECT skill_id, skill_name FROM skills";
+                    $query = "SELECT id, name FROM skills";
                     $result = mysqli_query($conn, $query);
                 ?>
                 <select name="skills" id="skill"  style="font-size: 20px; color: gray; display: inline-block; cursor: pointer;">
                     <optgroup style="color: #754ef9; cursor: pointer;">
                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                            <option value="<?php echo $row['skill_id'] . ' ' . $row['skill_name']; ?>" name="skills[<?php echo $row['skill_id']; ?>]">
-                                <?php echo $row['skill_name']; ?>
+                            <option value="<?php echo $row['id'] . ' ' . $row['name']; ?>" name="skills[<?php echo $row['id']; ?>]">
+                                <?php echo $row['name']; ?>
                             </option>
                         <?php endwhile; ?>
                     </optgroup>
