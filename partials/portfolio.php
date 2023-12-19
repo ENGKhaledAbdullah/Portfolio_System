@@ -13,10 +13,11 @@
         // $projectDescription = $_POST['project-description'];
         // $projectURL = $_POST['project-url'];
         require_once('database.php');
-        $sql="SELECT * FROM users WHERE username ='$username'";
+        $sql="SELECT * FROM user_info WHERE username ='$username'";
         $result = mysqli_query($conn,$sql);
         $user = mysqli_fetch_array($result,MYSQLI_ASSOC);
         print_r($user); 
+        exit;
         if(!empty($user)){
             $sql="SELECT * FROM user_info WHERE id ='".$user['id']."'";
             $result = mysqli_query($conn,$sql);

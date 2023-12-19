@@ -1,6 +1,6 @@
 <?php
 define("ROOT_PATH","/Portfolio_System/");
-define("moveUp","#");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

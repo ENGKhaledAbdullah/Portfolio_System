@@ -1,4 +1,4 @@
-<?php include('header.php')?>
+<?php require('header.php')?>
 <!-- register section design -->
 <section class="contact" id="register">
         <h2 class="heading">Register <span>Now!</span></h2>
@@ -67,4 +67,4 @@
             <input type="submit" name="submit" value="Register" class="btn">
         </form>
 </section>
-<?php include('footer.php')?>    
+<?php require('footer.php')?>    

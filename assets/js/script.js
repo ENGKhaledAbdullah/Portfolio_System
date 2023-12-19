@@ -13,6 +13,10 @@ let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
 window.onscroll = () => {
+    let sections = document.querySelectorAll('section');
+    let navLinks = document.querySelectorAll('header nav a');
+    let header = document.querySelector('.header');
+
     sections.forEach(sec => {
         let top = window.scrollY;
         let offset = sec.offsetTop - 150;
@@ -22,22 +26,16 @@ window.onscroll = () => {
         if(top >= offset && top < offset + height) {
             navLinks.forEach(links => {
                 links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
             });
+            document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
         };
     });
 
+    header.classList.toggle('sticky', window.scrollY > 50);
 
-/*========== sticky navbar ==========*/
-let header = document.querySelector('.header');
-
-header.classList.toggle('sticky', window.scrollY > 50);
-
-
-/*========== remove menu icon navbar when click navbar link (scroll) ==========*/
-menuIcon.classList.remove('bx-x');
-navbar.classList.remove('active');
-
+    /*========== remove menu icon navbar when click navbar link (scroll) ==========*/
+    menuIcon.classList.remove('bx-x');
+    navbar.classList.remove('active');
 };
 
 
