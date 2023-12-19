@@ -23,19 +23,19 @@ define("ROOT_PATH","/Portfolio_System/");
 <body>
     <!-- header design -->
 <header class="header" >
-    <a href="<?php echo ROOT_PATH;?>" class="logo">Pfolio</a>
+    <a href="<?= ROOT_PATH.'#home'?>" class="logo">Pfolio</a>
     <form method="post" id="search-form" action="/Portfolio_System/partials/portfolio.php">
         <input class="form-control me-2" id="search-bar" type="search" name="username" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" id="btn-search" type="submit"><i class="bx bx-search"></i></button>
     </form>
     <nav class="navbar">
         
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
+        <a href="<?= ROOT_PATH.'#home'?>" class="active">Home</a>
+        <a href="<?= ROOT_PATH.'#about'?>">About</a>
         <!-- <a href="#services">Services</a> -->
         <!-- <a href="#portfolio">Portfolio</a> -->
         <a href="<?php echo ROOT_PATH;?>partials/register.php">Register</a>
-        <a href="#contact">Contact Us</a>
+        <a href="<?= ROOT_PATH.'#contact'?>">Contact Us</a>
     </nav>
 
     <div class="bx bx-moon" id="darkMode-icon"></div>

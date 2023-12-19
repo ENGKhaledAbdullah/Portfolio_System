@@ -91,6 +91,9 @@ body {
     border-radius: 0 10px 10px 0;
 }
 
+a  {
+    text-decoration: none;
+}
 
 .logo {
     font-size: 2.5rem;
