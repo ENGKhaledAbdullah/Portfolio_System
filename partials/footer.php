@@ -5,7 +5,7 @@
 <!-- footer design -->
 <footer class="footer">
         <div class="footer-text">
-            <p>Copyright &copy; 2023 | All Rights Reserved.</p>
+            <p>Copyright &copy; 2023 | All Rights Reserved to <a href="https://github.com/ENGKhaledAbdullah">Eng.Khaled</a>.</p>
         </div>
 
         <div class="footer-iconTop">
