@@ -16,15 +16,15 @@
         $sql="SELECT * FROM user_info WHERE username ='$username'";
         $result = mysqli_query($conn,$sql);
         $user = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        print_r($user); 
-        exit;
+        // print_r($user); 
+        // exit;
         if(!empty($user)){
             $sql="SELECT * FROM user_info WHERE id ='".$user['id']."'";
             $result = mysqli_query($conn,$sql);
             $userInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
             // print_r($userInfo); 
             if(!empty($userInfo)){
-                $sql="SELECT * FROM user_skill WHERE user_id ='".$userInfo['id']."'";
+                $sql="SELECT name,img FROM user_info INNER JOIN user_skill ON ".$userInfo['id']."=user_skill.u_id INNER JOIN skills ON skills.id = user_skill.s_id ";
                 $result = mysqli_query($conn,$sql);
                 $skills = array();
                 // while ($row = mysqli_fetch_array($result)) {
@@ -42,6 +42,7 @@
                     $works[] = $userWork;
                 }
                 // print_r($works);
+                // exit;
             }
         }
     }
@@ -51,8 +52,8 @@
     <section class="home" id="home">
         <div class="home-content">
             <h3>Hello, I am</h3>
-            <h1><?php echo $result['username']?></h1>
-            <p> <?php echo $result['about_user']?></p>
+            <h1><?= $user['username']?></h1>
+            <p> <?= $user['about_user']?></p>
 
             <div class="social-media">
                 <a href="#"><i class='bx bxl-facebook'></i></a>
@@ -90,7 +91,7 @@
         </div>
 
         <div class="home-img">
-            <img src="images/home.png" alt="">
+            <img src="<?= $user['main_img']?>" alt="">
         </div>
     </section>
 

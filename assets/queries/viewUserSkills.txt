@@ -1,0 +1,1 @@
+SELECT name,img FROM user_info INNER JOIN user_skill ON user_info.id=user_skill.u_id INNER JOIN skills ON skills.id = user_skill.s_id; 

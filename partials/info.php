@@ -80,7 +80,7 @@
                     if (isset($_FILES['projectImg']) && $_FILES['projectImg']['error'] === UPLOAD_ERR_OK) {
                         $targetDir = '../assets/img/projectImgs/';
                         $projectImg= $targetDir . basename($_FILES['projectImg']['name']);
-                
+                        
                         if (move_uploaded_file($_FILES['projectImg']['tmp_name'], $projectImg)) {
                             echo 'File has been uploaded successfully.';
                         } else {
