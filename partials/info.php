@@ -54,7 +54,7 @@
                 } else {
                     require_once('database.php');
                     if (isset($_FILES['mainPicture']) && $_FILES['mainPicture']['error'] === UPLOAD_ERR_OK) {
-                        $targetDir = '../assets/img/mainImgs/img';
+                        $targetDir = '../assets/img/mainImgs/';
                         $mainImg = $targetDir . basename($_FILES['mainPicture']['name']);
                 
                         if (move_uploaded_file($_FILES['mainPicture']['tmp_name'], $mainImg)) {
@@ -66,9 +66,9 @@
                         echo 'Error: ' . $_FILES['mainPicture']['error'];
                     }
                     if (isset($_FILES['secondaryPicture']) && $_FILES['secondaryPicture']['error'] === UPLOAD_ERR_OK) {
-                        $targetDir = '../assets/img/secondImgs/img';
+                        $targetDir = '../assets/img/secondImgs/';
                         $secondaryImg= $targetDir . basename($_FILES['secondaryPicture']['name']);
-                
+                        
                         if (move_uploaded_file($_FILES['secondaryPicture']['tmp_name'], $secondaryImg)) {
                             echo 'File has been uploaded successfully.';
                         } else {
@@ -78,7 +78,7 @@
                         echo 'Error: ' . $_FILES['secondaryPicture']['error'];
                     }
                     if (isset($_FILES['projectImg']) && $_FILES['projectImg']['error'] === UPLOAD_ERR_OK) {
-                        $targetDir = '../assets/img/projectImgs/img';
+                        $targetDir = '../assets/img/projectImgs/';
                         $projectImg= $targetDir . basename($_FILES['projectImg']['name']);
                 
                         if (move_uploaded_file($_FILES['projectImg']['tmp_name'], $projectImg)) {
