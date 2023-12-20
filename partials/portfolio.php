@@ -49,6 +49,8 @@
     
     require('header.php'); 
     ?>
+
+    <!-- user-info section design -->
     <section class="home" id="home">
         <div class="home-content">
             <h3>Hello, I am</h3>
@@ -95,6 +97,52 @@
         </div>
     </section>
 
+    <!-- about section design -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="<?= $user['about_img']?>" alt="">
+        </div>
+
+        <div class="about-content">
+            <h2 class="heading">About <span>Me</span></h2>
+            <p><?= $user['about_user']?></p>
+            <br>
+            <a href="#" class="btn">Read More</a>
+        </div>
+    </section>
+
+    <!-- skills section design -->
+    <section class="services" id="services">
+        <h2 class="heading">My <span>Skills</span></h2>
+
+        <div class="services-container">
+            <?php foreach ($skills as $skill): ?>
+                <div class="services-box">
+                    <img src="<?= $skill['img'] ?>" alt="">
+                    <h3><?= $skill['name'] ?></h3>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <!-- works section design -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="heading">Latest <span>Projects</span></h2>
+
+        <div class="portfolio-container">
+            <?php foreach ($works as $work): ?>
+                <div class="portfolio-box">
+                    <img src="<?= $work['img'] ?>" alt="">
+
+                    <div class="portfolio-layer">
+                        <h4><?= $work['name'] ?></h4>
+                        <p><?= $work['description'] ?></p>
+                        <a href="<?= $work['url'] ?>"><i class='bx bx-link-external'></i></a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
 <?php
     require('footer.php');
 ?>

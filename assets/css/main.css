@@ -205,7 +205,7 @@ section {
     color: var(--main-color);
     transform: rotate(calc(360deg / 4 * var(--i)));
     transform-origin: 384px;
-    background: var(--bg-color);
+    background: transparent;
     padding: 13px 0;
 }
 
@@ -235,8 +235,8 @@ section {
 .home .profession-box .circle {
     width: 560px;
     height: 560px;
-    border: 3px solid var(--main-color);
-    border-radius: 50%;
+    /* border: 3px solid var(--main-color);
+    border-radius: 50%; */
     z-index: -1;
 }
 
@@ -435,11 +435,14 @@ section {
 
 .home-img img {
     position: absolute;
-    bottom: -200px;
-    right: 0;
+    /* bottom: -200px; */
+    top: 180px;
+    right: 20px;
     pointer-events: none;
-    max-width: 569px;
-    max-height: 144vh;
+    width: 300px;
+    height: 400px;
+
+    object-fit:contain ;
 }
 
 span {
@@ -532,9 +535,8 @@ span {
     transform: scale(1.02);
 }
 
-.services-box i {
-    font-size: 7rem;
-    color: var(--main-color);
+.services-box img {
+    width: 200px !important;
 }
 
 .services-box h3 {
@@ -843,9 +845,7 @@ label.info-label{
     .home .profession-container .overlay {
         right: -6%;
     }
-    .home-img img {
-        right: 0;
-    }
+    
 }
 
 @media (max-width: 1100px) {
@@ -856,9 +856,7 @@ label.info-label{
     .home .profession-container .profession-box {
         right: -15%;
     }
-    .home-img img {
-        max-width: 420px;
-    }
+    
 }
 
 @media (max-width: 1024px) {
@@ -1009,78 +1007,73 @@ label.info-label{
         display: none;
     }
 
-    .home-home{
+    .home {
+        margin-top:80px;
+        margin-bottom:150px;
         padding: 0 3% 23rem;
         justify-content: center;
         text-align: center;
     }
-    .home-content {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        text-align: center;
 
-    }
     .home-content h3 {
-        font-size: 3.2rem;
+        font-size: 2.6rem;
     }
 
     .home-content h1 {
-        font-size: 6rem;
+        font-size: 5rem;
     }
 
     .home-content .social-media a {
         margin: 2.5rem .75rem 3rem;
     }
 
-    .home-home.profession-container {
+    .home .profession-container {
         left: 0;
         width: 100%;
         height: 100%;
     }
 
-    .home-home.profession-container .profession-box {
+    .home .profession-container .profession-box {
         position: fixed;
         top: 450px;
         left: 0;
         width: 100%;
     }
 
-    .home-home.profession-box .profession {
+    .home .profession-box .profession {
         padding: 0 13px;
         left: auto;
         transform-origin: 0;
     }
 
-    .home-home.profession-box .profession:nth-child(1) {
-        transform: rotate(-90deg) translate(-120px, -210px);
+    .home .profession-box .profession:nth-child(1) {
+        transform: rotate(-90deg) translate(-120px, -199px);
     }
 
-    .home-home.profession-box .profession:nth-child(1) i {
+    .home .profession-box .profession:nth-child(1) i {
         margin-right: 0;
     }
 
-    .home-home.profession-box .profession:nth-child(2) {
-        /* top: 290px; */
-        transform: rotate(0deg) translate(0, -325px);
+    .home .profession-box .profession:nth-child(2) {
+        transform: rotate(0deg) translate(0, -400px);
     }
 
-    .home-home.profession-box .profession:nth-child(3) {
-        transform: rotate(90deg) translate(-115px, -450px);
+    .home .profession-box .profession:nth-child(3) {
+        transform: rotate(90deg) translate(-115px, -429px);
     }
 
-    .home-home.profession-box .profession:nth-child(4) {
-        transform: rotate(180deg) translate(-220px, -325px);
+    .home .profession-box .profession:nth-child(4) {
+        transform: rotate(180deg) translate(-199px, -309px);
     }
 
-    .home-home.profession-box .circle {
+    .home .profession-box .circle {
         position: fixed;
         width: 670px;
         height: 670px;
         z-index: -1;
     }
 
-    .home-home.profession-container .overlay {
+    .home .profession-container .overlay {
         position: fixed;
         top: 70rem;
         left: 50%;
@@ -1090,7 +1083,7 @@ label.info-label{
     }
 
     .about {
-        flex-direction: column;
+        flex-direction: column-reverse;
         text-align: center;
     }
 
@@ -1099,8 +1092,8 @@ label.info-label{
     }
 
     .about-img img {
-        width: 40vw;
-        /* margin-top: -2rem; */
+        width: 70vw;
+        margin-top: -2rem;
     }
 
     .testimonial-container .testimonial-wrapper {
@@ -1115,7 +1108,12 @@ label.info-label{
     .testimonial-box .swiper-button-prev {
         display: none;
     }
+    .home-img img{
+        display: none;
+    }
 }
+
+
 
 @media (max-width: 580px) {
     .portfolio .portfolio-container {
@@ -1133,38 +1131,23 @@ label.info-label{
     }
 
     .home .profession-box .profession:nth-child(1) {
-        transform: rotate(-90deg) translate(-110px, -220px);
+        transform: rotate(-90deg) translate(-110px, -199px);
+    }
+
+    .home .profession-box .profession:nth-child(1) i {
+        margin-right: 0;
     }
 
     .home .profession-box .profession:nth-child(2) {
-        transform: rotate(0deg) translate(5px, -325px);
+        transform: rotate(0deg) translate(0, -400px);
     }
 
     .home .profession-box .profession:nth-child(3) {
-        transform: rotate(90deg) translate(-105px, -440px);
+        transform: rotate(90deg) translate(-105px, -429px);
     }
 
     .home .profession-box .profession:nth-child(4) {
-        transform: rotate(180deg) translate(-210px, -325px);
-    }
-
-    .home .profession-container .overlay {
-        top: 80rem;
-    }
-    .home-home.profession-box .profession:nth-child(1) {
-        transform: rotate(-90deg) translate(-110px, -220px);
-    }
-
-    .home-home.profession-box .profession:nth-child(2) {
-        transform: rotate(0deg) translate(5px, -325px);
-    }
-
-    .home-home.profession-box .profession:nth-child(3) {
-        transform: rotate(90deg) translate(-105px, -440px);
-    }
-
-    .home-home.profession-box .profession:nth-child(4) {
-        transform: rotate(180deg) translate(-210px, -325px);
+        transform: rotate(180deg) translate(-189px, -309px);
     }
 
     .home-home.profession-container .overlay {
