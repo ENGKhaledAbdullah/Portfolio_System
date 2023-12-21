@@ -24,7 +24,7 @@
             $userInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
             // print_r($userInfo); 
             if(!empty($userInfo)){
-                $sql="SELECT name,img FROM user_info INNER JOIN user_skill ON ".$userInfo['id']."=user_skill.u_id INNER JOIN skills ON skills.id = user_skill.s_id ";
+                $sql="SELECT distinct name,img FROM user_info INNER JOIN user_skill ON ".$userInfo['id']."=user_skill.u_id INNER JOIN skills ON skills.id = user_skill.s_id ";
                 $result = mysqli_query($conn,$sql);
                 $skills = array();
                 // while ($row = mysqli_fetch_array($result)) {
@@ -32,6 +32,7 @@
                     $skills[] = $userSkill;
                 }
                 // print_r($skills);
+                // exit;
             }
             if(!empty($userInfo)){
                 $sql="SELECT * FROM works WHERE u_id ='".$userInfo['id']."'";
